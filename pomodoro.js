@@ -55,10 +55,50 @@ resetVariables: function(mins,secs, started) {
   this.fillerHeight = 0;
 },
 
-startWork: function(){
-  this.resetVariables(25,0,true)
-},
+  startWork: function(){
+    this.resetVariables(25,0,true)
+  },
 
-startShortBreak: function(){
-  this.resetVariables(5,0,true)
-},
+  startShortBreak: function(){
+    this.resetVariables(5,0,true)
+  },
+
+  startLongBreak: function(){
+    this.resetVariables(15,0,true)
+  },
+
+  stopTimer: function(){
+    this.resetVariables(25,0,false)
+    this.updateDom();
+  },
+
+  toDoubleDigit: function(){
+    if (num&lt; 10) {
+      return "0" + parseInt(num, 10);
+    }
+    return num;
+  },
+
+  updateDom: function(){
+    this.minutesDom.innerHTML = this.toDoubleDigit(this.minutes);
+    this.secondsDom.innerHTML = this.toDoubleDigit(this.seconds);
+    this.fillerHeight = this.fillerHeight + this.fillerIncrement;
+    this.fillerDom.style.height = this.fillerHeight + 'px';
+  },
+
+  intervalCallback: function(){
+    if(!this.started) return false;
+    if(this.seconds == 0) {
+      this(this.minutes == 0) {
+        this.timerComplete();
+        return;
+      }
+      this.seconds = 59;
+      this.minutes--;
+    } else {
+      this.seconds--;
+    }
+    this.updateDom();
+  },
+
+  timerComplete
