@@ -45,19 +45,71 @@ var pomodoro =
 
   bindEvents: function(){
 // Link session increase / decrease to relevant buttons
-  this.increaseSession.onclick = pomodoro.incrSession;
-  this.decreaseSession.onclick = pomodoro.decrSession;
-  this.increaseBreak.onclick = pomodoro.incrBreak;
-  this.decreaseBreak.onclick = pomodoro.decrBreak;
+    this.increaseSession.onclick = pomodoro.incrSession;
+    this.decreaseSession.onclick = pomodoro.decrSession;
+    this.increaseBreak.onclick = pomodoro.incrBreak;
+    this.decreaseBreak.onclick = pomodoro.decrBreak;
 
 // Link start / stop / reset buttons
-  this.coundownDisplay.onclick = pomodoro.startCountdown;
-  this.resetCountdownBtn.onclick = pomodoro.resetCountdown;
-  this.stopCountdownBtn.onclick = pomodoro.stopCountdown;
-  this.startCountdownBtn.onclick = pomodoro.startCountdown;
-},
+    this.coundownDisplay.onclick = pomodoro.startCountdown;
+    this.resetCountdownBtn.onclick = pomodoro.resetCountdown;
+    this.stopCountdownBtn.onclick = pomodoro.stopCountdown;
+    this.startCountdownBtn.onclick = pomodoro.startCountdown;
+  },
 
+  updateAllDisplays: function (){
+// Update html to respond when buttons are clicked
+    pomodoro.sessionLengthDisplay.innerHTML = this.sessionLength;
+    pomodoro.breakLengthDisplay.innerHTML = this.breakLength;
+    pomodoro.countdownDisplay.innerHTML = this.sessionLength +".00";
 
+    pomodoro.resetVariables();
+  },
+
+  requestNotification:function(){
+    if(!("Notification" in window)){
+      return console.log("This browser does not support desktop notification");
+    }
+  },
+
+  incrSession: function(){
+    if(pomodoro.sessionlength < 59){
+      pomodoro.sessionLength += 1;
+      pomodoro.updateAllDisplays();
+    }
+  },
+
+  decrSession: function(){
+    if(pomodoro.sessionLength > 1){
+      pomodoro.sessionLength -= 1;
+      pomodoro.updateAllDisplays();
+    }
+  },
+
+  incrBreak: function(){
+    if(pomodoro.breakLength < 30){
+      pomodoro.breakLength += 1;
+      pomodoro.updateAllDisplays();
+    }
+  },
+
+  decrBreak: function(){
+    if(pomodoro.breakLength > 1){
+      pomodoro.breakLength -= 1;
+      pomodoro.updateAllDisplays();
+    }
+  },
+
+// Reset variables
+  resetVariables: function(){
+    pomodoro.timeInterval = false;
+    pomodoro.workSession = true;
+    pomodoro.pausedTime = 0;
+    pomodoro.timeStopped = false;
+    pomodoro.timePaused = false;
+  },
+
+  
 
 
 
