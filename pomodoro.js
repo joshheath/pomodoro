@@ -190,10 +190,29 @@ var pomodoro =
   },
 
   stopCountdown: function(){
+// Stop timer
+    clearInterval(pomodoro.timeInterval);
+// Update HTML
+    pomodoro.updateAllDisplays();
+// Reset variables
+    pomodoro.resetVariables();
+    pomodoro.unDisableButtons();
+  },
 
-    
-  }
+  displayType: function(){
+// Change text above countdown depending whether in session or break
+    if(pomodoro.workSession === true){
+      pomodoro.typeDisplay.innerHTML = "work session";
+      pomodoro.countdownContainer.className = pomodoro.countdownContainer.className.replace("break", ""),
+    } else {
+      pomodoro.typeDisplay.innerHTML = "Break";
+      if(pomodoro.countdownContainer.className !== "break"){
+        pomodoro.countdownCountainer.className += "break";
+      }
+    }
+  },
 
+  
 
   }
 
