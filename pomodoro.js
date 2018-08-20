@@ -1,9 +1,9 @@
-var pomodoro =
+var pomodoro = {
 
-  init:function(){
+  init: function(){
     this.domVariables();
     this.timerVariables();
-    this.bind Events();
+    this.bindEvents();
     this.updateAllDisplays();
     this.requestNotification();
   },
@@ -51,11 +51,12 @@ var pomodoro =
     this.decreaseBreak.onclick = pomodoro.decrBreak;
 
 // Link start / stop / reset buttons
-    this.coundownDisplay.onclick = pomodoro.startCountdown;
+    this.countdownDisplay.onclick  = pomodoro.startCountdown;
     this.resetCountdownBtn.onclick = pomodoro.resetCountdown;
-    this.stopCountdownBtn.onclick = pomodoro.stopCountdown;
+    this.stopCountdownBtn.onclick  = pomodoro.stopCountdown;
     this.startCountdownBtn.onclick = pomodoro.startCountdown;
-  },
+
+    },
 
   updateAllDisplays: function (){
 // Update html to respond when buttons are clicked
@@ -72,8 +73,8 @@ var pomodoro =
     }
   },
 
-  incrSession: function(){
-    if(pomodoro.sessionlength < 59){
+  incrSession: function() {
+    if ( pomodoro.sessionLength < 59 ) {
       pomodoro.sessionLength += 1;
       pomodoro.updateAllDisplays();
     }
@@ -136,13 +137,13 @@ var pomodoro =
     var currTime = new Date().getTime();
     var difference = pomodoro.endTime - currTime;
 // Convert ms time into mins and seconds
-    var second = Math.floor((difference/1000)%60);
+    var seconds = Math.floor((difference/1000)%60);
     var minutes = Math.floor((difference/1000)/60%60);
 // Add 0 to seconds if < 10
     if (seconds < 10){ seconds = "0" + seconds};
 // Display remaining time unless there is less that 1 second, in which case change to next session
     if(difference > 1000){
-      pomodoro.coundownDisplay.innerHTML = minutes + ":" + seconds;
+      pomodoro.countdownDisplay.innerHTML = minutes + ":" + seconds;
     } else {
       pomodoro.changeSessions();
     }
@@ -166,7 +167,7 @@ var pomodoro =
 
   pauseCountdown: function(){
 // Save paused time and restart at right time
-    varr currTime = new Date().getTime();
+    var currTime = new Date().getTime();
     pomodoro.pausedTime = pomodoro.endTime - currTime;
     pomodoro.timePaused = true
 // Stop countdown on second click
@@ -199,46 +200,41 @@ var pomodoro =
     pomodoro.unDisableButtons();
   },
 
-  displayType: function(){
-// Change text above countdown depending whether in session or break
-    if(pomodoro.workSession === true){
+  displayType: function() {
+    // Check what session is running and change appearance and text above
+    // countdown depending on session (break or work)
+    if ( pomodoro.workSession === true ) {
       pomodoro.typeDisplay.innerHTML = "work session";
-      pomodoro.countdownContainer.className = pomodoro.countdownContainer.className.replace("break", ""),
+
+
+      pomodoro.countdownContainer.className = pomodoro.countdownContainer.className.replace( "break", "" );
     } else {
       pomodoro.typeDisplay.innerHTML = "Break";
-      if(pomodoro.countdownContainer.className !== "break"){
-        pomodoro.countdownCountainer.className += "break";
+      if ( pomodoro.countdownContainer.className !== "break" ) {
+        pomodoro.countdownContainer.className += "break";
       }
     }
   },
 
-  
+  playSound: function(){
+    var mp3 = "http://soundbible.com/grab.php?id=1746&type=mp3";
+    var audio = new Audio(mp3)
+    audio.play();
+  },
 
+  disableButtons: function(){
+    for(var i = 0; i < pomodoro.toggleTimerBtns.length; i++){
+      pomodoro.toggleTimerBtns[i].setAttribute("disabled", "disabled");
+      pomodoro.toggleTimerBtns[i].setAttribute("title", "Stop the countdown to change timer length");
+    }
+  },
+
+  unDisableButtons: function(){
+    for(var i = 0; i < pomodoro.toggleTimerBtns.length; i++){
+      pomodoro.toggleTimerBtns[i].removeAttribute("disabled");
+      pomodoro.toggleTimerBtns[i].removeAttribute("title");
+    }
   }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+pomodoro.init();
