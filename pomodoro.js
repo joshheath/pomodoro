@@ -148,6 +148,52 @@ var pomodoro =
     }
   },
 
+  changeSessions: function(){
+// Stop countdown
+    clearInterval(pomodoro.timeInterval);
+    pomodoro.playSound();
+// Toggle active work session or not - determines whether work or break session will be displayed
+    if(pomodoro.workSession === true) {
+      pomodoro.workSession = false;
+    } else {
+      pomodoro.workSession = true;
+    }
+// Stop countdown
+    pomodoro.timeInterval = false;
+// Restart with work session changed
+    pomodoro.startCountdown();
+  },
+
+  pauseCountdown: function(){
+// Save paused time and restart at right time
+    varr currTime = new Date().getTime();
+    pomodoro.pausedTime = pomodoro.endTime - currTime;
+    pomodoro.timePaused = true
+// Stop countdown on second click
+    clearInterval(pomodoro.timeInterval);
+// Reset variable so counter starts again when clicked
+    pomodoro.timeInterval = false;
+  },
+
+  unPauseCountdown: function(){
+    if (pomodoro.workSession === true){
+      pomodoro.endTime = pomodoro.startTime + (pomodoro.sessionLength * 600000);
+    }
+  },
+
+  resetCountdown: function(){
+// Stop clock and reset variables
+    clearInterval(pomodoro.timeInterval);
+    pomodoro.resetVariables();
+// Restart variables
+    pomodoro.startCountdown();
+  },
+
+  stopCountdown: function(){
+
+    
+  }
+
 
   }
 
