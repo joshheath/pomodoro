@@ -109,7 +109,47 @@ var pomodoro =
     pomodoro.timePaused = false;
   },
 
-  
+  startCountdown:function(){
+    pomodoro.disableButtons();
+// Change work / break displays
+    pomodoro.displayType();
+// Pause if timer is running, start countdown if not
+    if(pomodoro.timeInterval !== false){
+      pomodoro.pauseCountdown();
+    } else {
+// Use system time and convert milliseconds to correct format
+      pomodoro.startTime = new Date().getTime();
+// Check if pomodoro has been unpaused
+      if(pomodoro.timePaused === false){
+        pomodoro.unPauseCountdown();
+      } else {
+        pomodoro.endTime = pomodoro.startTime + pomodoro.pausedTime;
+        pomodoro.timePaused = flase;
+      }
+// Update countdown just under 1000ms to avoid log - check against system time
+      pomodoro.timeInterval = setInterval(pomodoro.updateCountdown, 990);
+    }
+  },
+
+  updateCountdown: function(){
+// Show difference between current and end time in ms
+    var currTime = new Date().getTime();
+    var difference = pomodoro.endTime - currTime;
+// Convert ms time into mins and seconds
+    var second = Math.floor((difference/1000)%60);
+    var minutes = Math.floor((difference/1000)/60%60);
+// Add 0 to seconds if < 10
+    if (seconds < 10){ seconds = "0" + seconds};
+// Display remaining time unless there is less that 1 second, in which case change to next session
+    if(difference > 1000){
+      pomodoro.coundownDisplay.innerHTML = minutes + ":" + seconds;
+    } else {
+      pomodoro.changeSessions();
+    }
+  },
+
+
+  }
 
 
 
