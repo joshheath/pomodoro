@@ -255,7 +255,7 @@ const pomodoro = {
     // Check what session is running and change appearance and text above
     // countdown depending on session (break or work)
     if ( pomodoro.workSession === true ) {
-      pomodoro.typeDisplay.innerHTML = "work session";
+      pomodoro.typeDisplay.innerHTML = "Time remaining for this work session";
 
 
       pomodoro.countdownContainer.className = pomodoro.countdownContainer.className.replace( "break", "" );

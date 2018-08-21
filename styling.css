@@ -1,7 +1,4 @@
-Styling.css
-
-styling.css
-
+/*
 $body-color: #942222;
 $primary-color: #BD3737;
 $secondary-color: #25857D;
@@ -11,12 +8,12 @@ $alt-primary-color: #98C3A1;
 
 $font-color: #fff;
 
-// http://www.colourlovers.com/palette/62358/Strawberry_Wound
+// http://www.colourlovers.com/palette/62358/Strawberry_Wound */
 
 body {
-	font: 20px 'work sans', sans-serif;
-	color: $font-color;
-	background: $body-color;
+  background-image: url(plums.jpg);
+  font: 20px 'work sans', sans-serif;
+	color: #FFFFFF;
 }
 
 * {
@@ -66,7 +63,7 @@ button {
   display: inline-block;
   height: 38px;
   padding: 0 10px;
-  color: $font-color;
+  color: #FFFFFF;
   text-align: center;
   font-size: 20px;
   font-weight: 600;
@@ -109,7 +106,7 @@ button {
 	margin-bottom: .4em;
 	display: inline-block;
 	background: $font-color;
-	color: $body-color;
+	color: #FFFFFF;
 	border: solid 1px $primary-color;
 	border-radius: 50%;
 }
@@ -138,16 +135,16 @@ header {
 		height: 16em;
 		padding-top: 5em;
 		border-radius: 50%;
-	  	border: 4px solid $primary-color;
+	  	border: 4px solid #FFFFFF;
 	}
 }
 .break {
-	background: $alt-body-color;
-	border-color: $alt-primary-color!important;
+	background: #FFFFFF;
+	border-color: #FFFFFF!important;
 	button {
-  		border-color: $alt-primary-color;
+  		border-color: #FFFFFF;
   		&:hover {
-  			background: $alt-primary-color;
+  			background: #FFFFFF;
   		}
   		&[disabled]{
 		  	cursor: not-allowed;
