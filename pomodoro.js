@@ -132,17 +132,19 @@ var pomodoro = {
     }
   },
 
-  updateCountdown: function(){
-// Show difference between current and end time in ms
+  updateCountdown: function() {
+    // Get differnce between the current time and the
+    // end time in miliseconds. difference = remaining time
     var currTime = new Date().getTime();
     var difference = pomodoro.endTime - currTime;
-// Convert ms time into mins and seconds
-    var seconds = Math.floor((difference/1000)%60);
-    var minutes = Math.floor((difference/1000)/60%60);
-// Add 0 to seconds if < 10
-    if (seconds < 10){ seconds = "0" + seconds};
-// Display remaining time unless there is less that 1 second, in which case change to next session
-    if(difference > 1000){
+    // Convert remaining milliseconds into minutes and seconds
+    var seconds = Math.floor( ( difference/1000 ) % 60 );
+    var minutes = Math.floor( ( difference/1000 ) / 60 % 60 );
+    // Add 0 to seconds if less than ten
+    if ( seconds < 10 ) { seconds = "0" + seconds; }
+    // Display remaining minutes and seconds, unless there is less than 1 second
+    // left on timer. Then change to next session.
+    if ( difference > 1000 ) {
       pomodoro.countdownDisplay.innerHTML = minutes + ":" + seconds;
     } else {
       pomodoro.changeSessions();
@@ -204,7 +206,7 @@ var pomodoro = {
     // Check what session is running and change appearance and text above
     // countdown depending on session (break or work)
     if ( pomodoro.workSession === true ) {
-      pomodoro.typeDisplay.innerHTML = "work session";
+      pomodoro.typeDisplay.innerHTML = "Work session";
 
 
       pomodoro.countdownContainer.className = pomodoro.countdownContainer.className.replace( "break", "" );
