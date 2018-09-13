@@ -110,7 +110,7 @@ button {
 	display: inline-block;
 	background: $font-color;
 	color: #FFFFFF;
-  outline-color: black;
+  outline-color: white;
 	border: solid 1px $primary-color;
 	border-radius: 50%;
 }
