@@ -269,7 +269,7 @@ const pomodoro = {
   },
   playSound() {
 
-    const mp3 = bell.wav;
+    const mp3 = "http://soundbible.com/grab.php?id=1746&type=mp3";
     const audio = new Audio(mp3);
     audio.play();
 
